@@ -39,7 +39,7 @@ class Generator:
             tracks.append(track_dict)
 
         tracks_ids = [track['id'] for track in recommendations['tracks']]
-        #sp.user_playlist_add_tracks(user_id, playlist['id'], tracks_ids)
+        sp.user_playlist_add_tracks(user_id, playlist['id'], tracks_ids)
 
         user_info = sp.current_user()
         username = user_info['id']
