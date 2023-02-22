@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation</title>
+</head>
+<body>
+    {{ message }}
+    <br>
+    <h3>Recommendation By machine learning algorithm to generate recommendations</h3>
+    {% for reco in recommendation %}
+        <div class="card mb-3">
+            <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ reco.image_url }}" class="img-fluid" alt="{{ song.name }}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <h5 class="card-title">{{ reco.song_name }}</h5>
+                {% for artist in reco.artists %}
+                <p class="card-text">{{ artist.name }} - {{ reco.album }}</p>
+                <a href="{{ artist.external_urls.spotify }}" target="_blank" class="btn btn-primary">Listen on Spotify</a>
+                {% endfor %}
+                </div>
+            </div>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
+{% endblock %}

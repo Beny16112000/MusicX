@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlists All</title>
+</head>
+<style>
+    #imig {
+        width: 240px;
+        height: 240px;
+    }
+</style>
+<body>
+    <h3>All Playlists</h3>
+    {% for k,v in playlists.items %}
+        {% for z in v %}
+        <div class="card mb-3">
+            <div class="row g-0">
+            <div class="col-md-4">
+                {% if z.images|length != 0 %}
+                    <a href="/playlists/one/{{ z.id }}"><img src="{{ z.images.0.url }}" alt="" id="imig"></a>
+                {% else %}
+                <a href="/playlists/one/{{ z.id }}"><img src="https://t3.ftcdn.net/jpg/04/54/66/12/240_F_454661277_NtQYM8oJq2wOzY1X9Y81FlFa06DVipVD.jpg" alt="Music Icon"></a>
+                {% endif %}                
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <h5 class="card-title">{{ z.name }}</h5>
+                <a href="{{ z.external_urls.spotify }}" target="_blank" class="btn btn-primary">Listen on Spotify</a>
+                <button class="btn btn-primary" style="background-color: greenyellow; color: black;" onclick="share(`{{ z.external_urls.spotify }}`)">Share</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% endfor %}
+</body>
+<button onclick="share()">Share</button>
+
+<script>
+    function share(src) {
+        var tempInput = document.createElement("input");
+        tempInput.value = src;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        alert("Link copied to clipboard!");
+    }
+</script>
+</html>
+{% endblock %}

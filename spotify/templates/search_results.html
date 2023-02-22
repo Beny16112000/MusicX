@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{ message }}
+    <br>
+    {% if results %}
+        <h3>Search Results:</h3>
+        {% for r in results %}
+        <div class="card mb-3">
+            <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ r.image }}" class="img-fluid" alt="{{ song.name }}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <h5 class="card-title">{{ r.name }}</h5>
+                <p class="card-text">{{ r.artist }} - {{ r.album }}</p>
+                <a href="https://open.spotify.com/track/{{r.id}}" target="_blank" class="btn btn-primary">Listen on Spotify</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+    
+</body>
+</html>
+{% endblock %}
